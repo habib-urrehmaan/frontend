@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: node-frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        app: dice
+    spec:
+      containers:
+      - name: frontend
+        image: habiburrehman344/frontend:0.3
+        ports:
+        - containerPort: 8080
+          name: tcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: NodePort
+  selector:
+    tier: frontend
+    app: dice
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 31000

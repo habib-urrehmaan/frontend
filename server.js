@@ -4,7 +4,7 @@ const express = require('express');
 let id = 0;
 // Constants
 const PORT = 8080;
-const HOST = '172.17.0.1';
+const HOST = '0.0.0.0';
 
 // App
 const app = express();
@@ -17,7 +17,7 @@ var request = require('request');
 app.get('/instructor/:id', (req, res) => {
   id = Number(req.params.id)
   let name = ""
-  request(String(`http://localhost:8081/instructor/${id}`), function (error, response, body) {
+  request(String(`http://backend:8080/instructor/${id}`), function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var obj = JSON.parse(body);
       name = "Hello "+obj.firstName + " " + obj.lastName
