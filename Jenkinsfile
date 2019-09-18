@@ -50,7 +50,7 @@ pipeline
       }
     }
 
-    stage('Apply Development') {
+    stage('Apply Deployment') {
       steps
       {
         sh 'kubectl scale --replicas=0 deployment node-frontend'
