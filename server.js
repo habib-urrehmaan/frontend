@@ -27,5 +27,28 @@ app.get('/instructor/:id', (req, res) => {
 
 });
 
+app.get('/student/:id', (req, res) => {
+  id = Number(req.params.id)
+  let name = ""
+  request(String(`http://backend:8080/student/${id}`), function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var obj = JSON.parse(body);
+      name = "Hello "+obj.firstName + " " + obj.lastName
+      res.send(name);
+    }
+  })
+
+});
+
+app.get('/welcome', (req, res) => {
+  request(String(`http://backend:8080/welcome`), function (error, response, body) {
+    if (error)
+      res.send(error);
+      // var obj = ;
+      res.send(response);
+    // }
+  });
+});
+
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

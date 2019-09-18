@@ -3,7 +3,7 @@ pipeline
   environment 
   {
     registry = "habiburrehman344/frontend"
-    registryCredential = 'docker-credentials'
+    registryCredential = 'DockerHub'
   }
   
   agent any
@@ -25,7 +25,7 @@ pipeline
     {
       steps 
       {
-          echo 'Application was built'
+          sh 'npm install'
       }
     }
 
@@ -50,25 +50,11 @@ pipeline
       }
     }
 
-    stage('Initialize Minikube')
-    {
+    stage('Apply Development') {
       steps
       {
-        script
-        {
-          sh "minikube start"
-        }
-      }
-    }
-
-    stage('Update Deployment')
-    {
-      steps
-      {
-        script
-        {
-          sh "kubectl apply -f frontend.yaml"
-        }
+        sh 'kubectl scale --replicas=0 deployment python-frontend'
+        sh 'kubectl scale --replicas=1 deployment python-frontend'
       }
     }
   }
