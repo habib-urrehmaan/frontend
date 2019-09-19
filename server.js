@@ -13,7 +13,7 @@ app.get('/hello', (req, res) => {
 });
 
 app.get('/welcome',(req,res)=>{
-  res.send('Welcome to CI/CD');
+  res.send('Welcome to CI/CD World');
 });
 
 var request = require('request');
