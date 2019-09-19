@@ -12,6 +12,10 @@ app.get('/hello', (req, res) => {
   res.send('Hello world\n');
 });
 
+app.get('/welcome',(req,res)=>{
+  res.send('Welcome to CI/CD');
+});
+
 var request = require('request');
 
 app.get('/instructor/:id', (req, res) => {
